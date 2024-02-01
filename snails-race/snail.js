@@ -6,7 +6,7 @@ export class Snail {
         this.element = document.createElement('div');
 
         this.createSnail ()
-        this.moveSnail()
+        this.raceStart () 
     }
 
     snailPositionX = 0;
@@ -51,5 +51,13 @@ export class Snail {
             }
             console.log(this.snailPositionX);
           }, 40);
+    }
+
+    raceStart () {
+        this.body.addEventListener("keypress", (event) => {
+            if (event.code === "Space") {
+                this.moveSnail()
+            }
+        })
     }
 }
