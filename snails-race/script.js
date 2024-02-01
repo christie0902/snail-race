@@ -1,19 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-  moveSnail();
-});
+import { Snail } from "./snail.js";
 
-const snail = document.querySelector(".snail");
+const snailRacers = [
+  { name: "Bung bia", speed: 10, color: "green" },
+  { name: "Lala", speed: 20, color: "orange" },
+  { name: "Boba", speed: 12, color: "yellow" },
+];
 
-let snailPositionX = 0;
-let intervalID;
-const speed = 10;
-
-const moveSnail = () => {
-  intervalID = setInterval(() => {
-    snailPositionX += (40 * speed) / 1000;
-    snail.style.left = `${snailPositionX}px`;
-    if (snailPositionX > 800) {
-      clearInterval(intervalID);
-    }
-  }, 40);
-};
+snailRacers.forEach ((snailRacer) => {
+  const racer = new Snail (snailRacer.name, snailRacer.speed, snailRacer.color);
+})

@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <title>The Snails' Race</title>
-  </head>
-  <body>
-    <!-- <div class="snail-racer"> -->
-      <!-- <svg
+export class Snail {
+    constructor(name,speed,color) {
+        this.name = name;
+        this.speed = speed;
+        this.color = color;
+        this.element = document.createElement('div');
+
+        this.createSnail ()
+        this.moveSnail()
+    }
+
+    snailPositionX = 0;
+    intervalID;
+    body = document.body;
+
+    createSnail () {
+        this.element.className = "snail-racer";
+        this.element.innerHTML = `<svg
         class="snail"
         viewBox="0 0 260 200"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,13 +26,30 @@
         />
 
         <path
-          class="snail__shell"
+          style = "fill:${this.color}"
           d="m82.12 102a17.41 17.41 0 0 1-17.41 17.41 17.41 17.41 0 0 1-17.41-17.41 17.41 17.41 0 0 1 17.41-17.41 17.41 17.41 0 0 1 17.41 17.41zm-9.003-45.63a44.29 44.29 0 0 0-44.29 44.29 44.29 44.29 0 0 0 44.29 44.29 44.29 44.29 0 0 0 44.29-44.29 44.29 44.29 0 0 0-44.29-44.29zm-7.906 22.57c12.62 0 22.91 10.29 22.91 22.91 0 12.62-10.29 22.91-22.91 22.91-12.62 0-22.91-10.29-22.91-22.91 0-12.62 10.29-22.91 22.91-22.91zm22.69-63.65a81.53 81.53 0 0 0-81.53 81.53 81.53 81.53 0 0 0 81.53 81.53 81.53 81.53 0 0 0 81.53-81.53 81.53 81.53 0 0 0-81.53-81.53zm-14.25 35.45c27.56 0 49.97 22.41 49.97 49.97 0 27.56-22.41 49.97-49.97 49.97-27.56 0-49.97-22.41-49.97-49.97 0-27.56 22.41-49.97 49.97-49.97z"
         />
-      </svg>
-      <div class="snail-racer__name">Theodor</div> -->
-    <!-- </div> -->
+      </svg>`
 
-    <script src="script.js" type="module"></script>
-  </body>
-</html>
+        this.giveName ();
+        this.body.appendChild(this.element);
+    }
+
+    giveName () {
+        const name = document.createElement('div');
+        name.classList.add('snail-racer__name');
+        name.textContent = `${this.name}`;
+        this.body.appendChild(name);
+    }
+
+    moveSnail() {
+        this.intervalID = setInterval(() => {
+            this.snailPositionX += (40 * this.speed) / 1000;
+            this.element.style.left = `${this.snailPositionX}px`;
+            if (this.snailPositionX > 1500) {
+              clearInterval(this.intervalID);
+            }
+            console.log(this.snailPositionX);
+          }, 40);
+    }
+}

@@ -9,6 +9,7 @@ html {
 
 .snail-racer {
   width: 160px;
+  position: relative;
 }
 
 .snail {
